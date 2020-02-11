@@ -4,7 +4,7 @@ export default function book (state = [], action) {
         return[
             ...state, action.payload
         ];
-    }else if(action.type === 'GET_ALL'){
+    }else if(action.type === 'REQUESTED_BOOK_SUCCEEDED'){
         return action.payload;
     }else if(action.type === 'DELETE_BOOK'){
         return state.filter(book=>book.id !== action.payload);

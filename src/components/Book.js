@@ -9,8 +9,8 @@ export default class Book extends React.Component{
                 <p>author: {this.props.book.author}</p>
                 <p>description: {this.props.book.description}</p>
                 <p>published: {this.props.book.published}</p>
-                <button onClick={()=>this.props.edit(this.props.book.id)}>Edit</button>
-                <button onClick={()=>this.props.delete(this.props.book.id)}>Delete</button>
+                {/*<button onClick={()=>this.props.edit(this.props.book.id)}>Edit</button>*/}
+                {/*<button onClick={()=>this.props.delete(this.props.book.id)}>Delete</button>*/}
             </div>
         )
     }

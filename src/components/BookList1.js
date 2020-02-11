@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {deleteBook, getAllBooks, editBook} from "../actions";
 import Book from "./Book";
 import UpdateBook from "./UpdateBook";
+import {fetchBook} from "../actions/actionCreator";
 
 class BookList1 extends React.Component {
     componentDidMount() {
@@ -14,26 +15,48 @@ class BookList1 extends React.Component {
         console.log(x);
         return(
             <div>
-                {x.map(book=>( book.edited ? <UpdateBook book={book} key={book.id} /> :
-                    <Book key={book.id} book={{...book,edited:false}} delete={this.props.onDeleteBook} edit={this.props.onEditBook} />))}
+                <div>
+                    {x.map(book=> <Book key={book.id} book={{...book}} />)}
+                    {/*<Book key={book.id} book={{...book, edited:false}} delete={this.props.onDeleteBook} edit={this.props.onEditBook} />))}*/}
+                </div>
+
             </div>
         );
     }
 }
 
-export default connect(
-    state => ({
+export const mapStateToProps = (state) => {
+    return {
         books: state.book
-    }),
-    dispatch => ({
-        AddBook: () => {
-            dispatch(getAllBooks());
-        },
-        onDeleteBook:(id=>{
-           dispatch(deleteBook(id))
-        }),
-        onEditBook:(id=>{
-            dispatch(editBook(id));
-        })
-    })
+    }
+};
+
+export const mapDispatchToProps = (dispatch) => {
+    return {
+    AddBook: () => {
+        dispatch({ type: "FETCHED_BOOK"})
+    }
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
 )(BookList1);
+
+// export default connect(
+//     state => ({
+//         books: state.book
+//     }),
+//     dispatch => ({
+//         AddBook: () => {
+//             dispatch(getAllBooks());
+//         },
+//         onDeleteBook:(id=>{
+//            dispatch(deleteBook(id))
+//         }),
+//         onEditBook:(id=>{
+//             dispatch(editBook(id));
+//         })
+//     })
+// )(BookList1);
