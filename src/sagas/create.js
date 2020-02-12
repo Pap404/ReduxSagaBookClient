@@ -12,9 +12,9 @@ function createNewBook(data) {
 
 export function* createNewBookAsync(action) {
     try {
-        const newBook = yield call(createNewBook, action.payload);
-        console.log(newBook);
-        yield put({ type: 'ADD_BOOK', payload: newBook.data });
+        const data = yield call(createNewBook, action.payload);
+        const book = data.data;
+        yield put({ type: 'ADD_BOOK', payload: book });
     } catch (error) {
         return console.log("Error! Can't add new book");
     }
