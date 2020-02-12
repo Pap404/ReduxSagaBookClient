@@ -1,5 +1,5 @@
 export const requestBookSuccess = (data) => {
-    return { type: 'REQUESTED_BOOK_SUCCEEDED', payload: data }
+    return { type: 'GET_BOOK', payload: data }
 };
 
 export const fetchBook = () => {

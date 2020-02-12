@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createBook} from "../actions";
-
+import {fetchNewBookAsync} from "../sagas/get";
 
 class CreateBook extends React.Component {
     state = {
@@ -19,7 +19,7 @@ class CreateBook extends React.Component {
     handleSubmit = e=>{
         e.preventDefault();
         if(this.state.title.trim() && this.state.author.trim() && this.state.description.trim() && this.state.published.trim()){
-            this.props.dispatch(createBook(this.state));
+            this.props.newBook(this.state);
             this.handleReset();
         }
     }
@@ -78,12 +78,15 @@ class CreateBook extends React.Component {
     }
 }
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         onAddBook: book => {
-//             dispatch(createBook(book));
-//         }
-//     };
-// };
+const mapDispatchToProps = dispatch => {
+    return {
+        newBook: book => {
+            dispatch({ type : "CREATE_BOOK", payload: book});
+        }
+    };
+};
 
-export default connect()(CreateBook)
+export default connect(
+    null,
+    mapDispatchToProps
+)(CreateBook)
