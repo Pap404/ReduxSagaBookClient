@@ -12,10 +12,10 @@ export default function book (state = [], action) {
         return state.map((book) => book.id === action.id ? { ...book, edited: !book.edited } : book)
     }else if(action.type === 'UPDATE'){
         return state.map((book) => book.id === action.id ? { ...book,
-            title:action.data.newTitle,
-            author:action.data.newAuthor,
-            description:action.data.newDescription,
-            published:action.data.newPublished,
+            title:action.data.title,
+            author:action.data.author,
+            description:action.data.description,
+            published:action.data.published,
             edited: !book.edited } : book)
     }
     return state;

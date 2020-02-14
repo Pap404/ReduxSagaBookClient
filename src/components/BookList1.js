@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {deleteBook, getAllBooks, editBook} from "../actions";
 import Book from "./Book";
 import UpdateBook from "./UpdateBook";
-import {fetchBook} from "../actions/actionCreator";
 
 class BookList1 extends React.Component {
     componentDidMount() {
@@ -16,8 +14,8 @@ class BookList1 extends React.Component {
         return(
             <div>
                 <div>
-                    {x.map(book=> <Book key={book.id} book={{...book}} />)}
-                    {/*<Book key={book.id} book={{...book, edited:false}} delete={this.props.onDeleteBook} edit={this.props.onEditBook} />))}*/}
+                    {x.map(book=>(book.edited ? <UpdateBook book={book} key={book.id} />
+                    : <Book key={book.id} book={{...book, edited:false}} delete={this.props.DeleteBook} edit={this.props.EditBook} />))}
                 </div>
 
             </div>
@@ -34,8 +32,14 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => {
     return {
     AddBook: () => {
-        dispatch({ type: "FETCHED_BOOK"})
-    }
+        dispatch({ type: "FETCHED_BOOK" })
+    },
+    DeleteBook: (id) => {
+        dispatch({ type: "REMOVE_BOOK", id })
+    },
+        EditBook: (id) => {
+        dispatch({ type: "EDIT_BOOK", id })
+        }
     }
 };
 

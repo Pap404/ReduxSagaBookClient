@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateBook } from "../actions";
 
-
 class UpdateBook extends Component {
     handleEdit = (e) => {
         e.preventDefault();
@@ -15,8 +14,8 @@ class UpdateBook extends Component {
             newAuthor,
             newDescription,
             newPublished
-        }
-        this.props.dispatch(updateBook(this.props.book.id,data))
+        };
+        this.props.EditBook1(this.props.book.id, data);
     }
     render() {
         return (
@@ -36,4 +35,16 @@ class UpdateBook extends Component {
         );
     }
 }
-export default connect()(UpdateBook);
+
+export const mapDispatchToProps = (dispatch) => {
+    return {
+        EditBook1: (id, payload) => {
+            dispatch({type: "UPDATE_BOOK", id, payload })
+        }
+    }
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(UpdateBook);
