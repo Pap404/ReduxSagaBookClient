@@ -16,7 +16,7 @@ class CreateBook extends React.Component {
             [e.target.name]: e.target.value
         });
     };
-    handleSubmit = e=>{
+    handleSubmit = e => {
         e.preventDefault();
         if(this.state.title.trim() && this.state.author.trim() && this.state.description.trim() && this.state.published.trim()){
             this.props.dispatch(createBook(this.state));
