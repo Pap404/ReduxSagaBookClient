@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import {Field, reduxForm, values} from 'redux-form';
+import React from 'react';
+import {Field, reduxForm} from 'redux-form';
 import fieldBookComponent from "./FieldBookComponent";
+import { connect } from 'react-redux';
+import {createBook} from "../actions";
 
 const validate = values => {
     const errors = {};
@@ -28,8 +30,7 @@ const validate = values => {
             const {handleSubmit, reset} = props;
 
             return (
-
-                <form onSubmit={handleSubmit(values)}>
+                <form onSubmit={handleSubmit}>
                     <Field
                         name='title'
                         type='text'
@@ -57,15 +58,24 @@ const validate = values => {
                     <button type="submit" onClick={handleSubmit}>
                         Submit Form
                     </button>
-                    <button type="button" onClick={reset}>Очистить форму</button>
+                    <button type="button" onClick={reset}>Clear</button>
                 </form>
             )
         };
 
-
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            createBook: dispatch(createBook)
+        }
+    }
 
 export default reduxForm({
-    form: 'myForm',
+    form: "myForm",
     validate
-})(FormBookComponent);
+})(
+    connect(
+        null,
+        mapDispatchToProps
+    )(FormBookComponent))
+
 
