@@ -5,15 +5,15 @@ import { updateBook } from "../actions";
 class UpdateBook extends Component {
     handleEdit = (e) => {
         e.preventDefault();
-        const newTitle = this.getTitle.value;
-        const newAuthor = this.getAuthor.value;
-        const newDescription = this.getDescription.value;
-        const newPublished = this.getPublished.value;
+        const title = this.getTitle.value;
+        const author = this.getAuthor.value;
+        const description = this.getDescription.value;
+        const published = this.getPublished.value;
         const data = {
-            newTitle,
-            newAuthor,
-            newDescription,
-            newPublished
+            title,
+            author,
+            description,
+            published
         };
         this.props.EditBook1(this.props.book.id, data);
     }

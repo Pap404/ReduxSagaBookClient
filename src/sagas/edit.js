@@ -8,12 +8,13 @@ export function* watchUpdateBook() {
 function updateBook(id, data) {
     console.log("data:" + data.newTitle);
     console.log(id);
+    console.log(data);
     return axios.put(`https://spring-boot-mysql-server-part0.herokuapp.com/api/books/${id}`,
         {
-        title: data.newTitle,
-        author: data.newAuthor,
-        description: data.newDescription,
-        published: data.newPublished
+        title: data.title,
+        author: data.author,
+        description: data.description,
+        published: data.published
         })
         // .then(res => res.json())
 }
